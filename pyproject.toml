@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "nonebot_plugin_jx3"
-version = "0.5.4"
-authors = [
-    { name="fuyang", email="415276785@qq.com" },
-]
+name = "nonebot-plugin-jx3"
+version = "0.5.5"
 description = "一个nonebot2的jx3插件"
+authors = ["water <415276785@qq.com>"]
+license ="MIT"
 readme = "README.md"
-Homepage = "https://github.com/fuyang0811/nonebot-plugin-jx3.git"
+packages = [{include = "nonebot_plugin_jx3"}]
+homepage = "https://github.com/fuyang0811/nonebot-plugin-jx3.git"
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -17,8 +17,8 @@ tinydb= "^4.5.1"
 aiohttp= "^3.7.4"
 
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
 
 
