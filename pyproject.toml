@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nonebot_plugin_jx3"
+version = "0.5"
+authors = [
+    { name="fuyang", email="415276785@qq.com" },
+]
+description = "一个nonebot2的jx3插件"
+readme = "README.md"
+requires-python = ">=3.7"
+
+[project.dependencies]
+httpx = "^0.19.0"
+tinydb = "^4.5.1"
+aiohttp = "^3.7.4"
+
+[project.urls]
+"Homepage" = "https://github.com/fuyang0811/nonebot-plugin-jx3.git"
+
+
