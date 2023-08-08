@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nonebot_plugin_jx3"
-version = "0.5"
+version = "0.5.1"
 authors = [
     { name="fuyang", email="415276785@qq.com" },
 ]
