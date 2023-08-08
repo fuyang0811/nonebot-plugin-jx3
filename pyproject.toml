@@ -11,7 +11,6 @@ authors = [
 description = "一个nonebot2的jx3插件"
 readme = "README.md"
 requires-python = ">=3.7"
-dependencies = ["httpx", "tinydb", "aiohttp"]
 
 [tool.poetry.dependencies]
 python = ">=3.8"
