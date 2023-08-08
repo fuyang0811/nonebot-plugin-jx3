@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot_plugin_jx3"
-version = "0.5.3"
+version = "0.5.4"
 authors = [
     { name="fuyang", email="415276785@qq.com" },
 ]
