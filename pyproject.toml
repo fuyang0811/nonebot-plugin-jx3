@@ -11,11 +11,15 @@ authors = [
 description = "一个nonebot2的jx3插件"
 readme = "README.md"
 requires-python = ">=3.7"
+dependencies = ["httpx", "tinydb", "aiohttp"]
 
-[project.dependencies]
-httpx = "^0.19.0"
-tinydb = "^4.5.1"
-aiohttp = "^3.7.4"
+[tool.poetry.dependencies]
+httpx=">=0.19.0"
+tinydb=">=4.5.1"
+aiohttp=">=3.7.4"
+python = ">=3.8"
+nonebot2 = ">=2.0.0rc1"
+nonebot-adapter-onebot = ">=2.0.0"
 
 [project.urls]
 "Homepage" = "https://github.com/fuyang0811/nonebot-plugin-jx3.git"
