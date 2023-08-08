@@ -14,12 +14,13 @@ requires-python = ">=3.7"
 dependencies = ["httpx", "tinydb", "aiohttp"]
 
 [tool.poetry.dependencies]
-httpx=">=0.19.0"
-tinydb=">=4.5.1"
-aiohttp=">=3.7.4"
 python = ">=3.8"
 nonebot2 = ">=2.0.0rc1"
 nonebot-adapter-onebot = ">=2.0.0"
+httpx= ">=0.19.0"
+tinydb= ">=4.5.1"
+aiohttp= ">=3.7.4"
+
 
 [project.urls]
 "Homepage" = "https://github.com/fuyang0811/nonebot-plugin-jx3.git"
