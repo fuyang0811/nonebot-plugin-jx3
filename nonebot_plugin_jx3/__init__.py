@@ -5,22 +5,26 @@ from nonebot import on_command
 from nonebot.adapters import Message
 from nonebot.adapters.onebot.v11 import MessageSegment
 from nonebot.params import CommandArg
-from . import subscribe
+
 #from .zhue import setup2
-from .bind import get_bind_server
-from .userdefine import emm
+
+
 
 if not os.path.exists("./data"):
     os.mkdir("./data")
 if not os.path.exists("./data/jx3bind.json"):
-    with open("./data/jx3bind.json", "w", encoding="utf-8") as f:
+    with open("./data/jx3bind.json", "w+", encoding="utf-8") as f:
         f.write("{}")
 if not os.path.exists("./data/jx3subscribe.json"):
-    with open("./data/jx3subscribe.json", "w", encoding="utf-8") as f:
+    with open("./data/jx3subscribe.json", "w+", encoding="utf-8") as f:
         f.write("{}")
-api_base_url = "https://v7.jx3api.com"
+print("11111")
+api_base_url = "https://www.jx3api.com"
 from nonebot import get_driver
 from .config import Config
+from . import subscribe
+from .bind import get_bind_server
+from .userdefine import emm
 
 plugin_config = Config.parse_obj(get_driver().config)
 robot = plugin_config.jx3_bot_name
@@ -353,7 +357,7 @@ async def handle_kaifu(event, args: Message = CommandArg()):
     if response["code"] == 200:
         await jx3api_kaifu.finish(status)
     elif response["code"] == 404 or response["code"] == 400:
-        await jx3api_match_recent.finish(response["msg"])
+        await jx3api_kaifu.finish(response["msg"])
     else:
         await jx3api_kaifu.finish("请求出错，请稍后再试")
 jx3api_qiyu = on_command(head + "奇遇")
@@ -420,3 +424,10 @@ async def handle_zhaomu(event, args: Message = CommandArg()):
         await jx3api_zhaomu.finish(response["msg"])
     else:
         await jx3api_zhaomu.finish("请求出错，请稍后再试")
+async def deal_error(jx3api_handle,response):
+    if response["code"]==403:
+        await jx3api_handle.finish("请配置jx3api-key")
+    elif response["code"] == 404 or response["code"] == 400:
+        await jx3api_handle.finish(response["msg"])
+    else:
+        await jx3api_handle.finish("请求出错，请稍后再试")

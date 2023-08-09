@@ -4,8 +4,11 @@ from nonebot import on_command
 from nonebot.adapters import Message
 from nonebot.params import CommandArg
 from tinydb import TinyDB, Query
+from nonebot import get_driver
+from .config import Config
 
-head = "-"
+plugin_config = Config.parse_obj(get_driver().config)
+head = plugin_config.jx3_command_header
 db_path1 = "./data/jx3bind.json"#os.path.join(os.path.dirname(__file__), 'data', 'jx3bind.json')
 bind_servers_db = TinyDB(db_path1)
 User = Query()

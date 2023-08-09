@@ -41,7 +41,6 @@ async def websocket_handler():
         try:
             async with ClientSession(timeout=ClientTimeout(total=1)) as session:
                 async with session.ws_connect("wss://socket.nicemoe.cn", headers=wssheaders,timeout=1) as ws:
-                    print(await get_subscribe_group("818"))
                     ws_connected = ws
                     print("连接成功")
                     loop = True
