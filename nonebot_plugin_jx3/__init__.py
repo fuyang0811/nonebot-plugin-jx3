@@ -30,8 +30,11 @@ __plugin_meta__ = PluginMetadata(
     name="nonebot-plugin-jx3",
     description="是一个使用 NoneBot 框架编写的插件，提供多种剑网三功能如日常查询，预测，金价查询，鲜花，公告，沙盘，jjc，黑市，骚话，奇遇，招募以及多种消息推送功能。",
     usage="剑网三帮助",
+    type="application",
     config=Config,
     extra={},
+    homepage="https://github.com/fuyang0811/nonebot-plugin-jx3",
+    supported_adapters={"~onebot.v11"},
 )
 plugin_config = Config.parse_obj(get_driver().config)
 robot = plugin_config.jx3_bot_name

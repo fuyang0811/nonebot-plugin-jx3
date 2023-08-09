@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "nonebot-plugin-jx3"
-version = "0.6.0"
+version = "0.6.1"
 description = "一个nonebot2的jx3插件"
 authors = ["water <415276785@qq.com>"]
 license ="MIT"
 readme = "README.md"
 packages = [{include = "nonebot_plugin_jx3"}]
-homepage = "https://github.com/fuyang0811/nonebot-plugin-jx3.git"
+homepage = "https://github.com/fuyang0811/nonebot-plugin-jx3"
 
 [tool.poetry.dependencies]
 python = "^3.8"
