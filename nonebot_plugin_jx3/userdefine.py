@@ -8,7 +8,7 @@ from nonebot.params import CommandArg
 
 from .websocket_handler import get_group_ids
 
-filename = "qiyu.csv"
+"""filename = "qiyu.csv"
 filename = os.path.join(os.path.dirname(__file__), 'data', f'{filename}')
 qiyu_urls = {}
 head = "-"
@@ -45,7 +45,7 @@ async def handle_gonglue(event, args: Message = CommandArg()):
             text = text + i
     await jx3api_gonglue.finish(text + image + qiyu_urls[name])
 
-
+"""
 scheduler = require("nonebot_plugin_apscheduler").scheduler
 print("攻防订阅加载")
 
