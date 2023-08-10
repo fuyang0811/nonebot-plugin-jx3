@@ -7,6 +7,8 @@ from nonebot.adapters.onebot.v11 import MessageSegment
 from nonebot.params import CommandArg
 from nonebot import get_driver
 from .config import Config
+if not os.path.exists("./data"):
+    os.mkdir("./data")
 from . import subscribe
 from .bind import get_bind_server
 from .userdefine import emm
