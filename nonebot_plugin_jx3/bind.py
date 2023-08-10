@@ -5,12 +5,14 @@ from nonebot.params import CommandArg
 from tinydb import TinyDB, Query
 from nonebot import get_driver
 from .config import Config
+from nonebot.adapters.onebot.v11.permission import GROUP_ADMIN, GROUP_OWNER
 
 plugin_config = Config.parse_obj(get_driver().config)
 head = plugin_config.jx3_command_header
 bind_servers_db = TinyDB("./data/jx3_bind.json")
 User = Query()
-server_lib=[""]
+server_lib = [""]
+
 
 async def add_bind_server(group_id_in: int, server_name_in: str):
     bind_servers_db.insert({"group_id": group_id_in, "server": server_name_in})
@@ -34,7 +36,7 @@ async def get_bind_group(server: str):
     return group_ids
 
 
-bind_server = on_command(head + "绑定", priority=5)
+bind_server = on_command(head + "绑定", priority=5, permission=GROUP_OWNER | GROUP_ADMIN)
 
 
 @bind_server.handle()

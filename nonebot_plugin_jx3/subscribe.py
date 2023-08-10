@@ -7,6 +7,7 @@ from nonebot.params import CommandArg
 from tinydb import TinyDB, Query
 
 from .config import Config
+from nonebot.adapters.onebot.v11.permission import GROUP_ADMIN, GROUP_OWNER
 
 plugin_config = Config.parse_obj(get_driver().config)
 robot = plugin_config.jx3_bot_name
@@ -15,7 +16,9 @@ ticket = plugin_config.jx3_tuilan_ticket
 token = plugin_config.jx3api_key
 subscribes_db = TinyDB("./data/jx3_subscribe.json")
 User = Query()
-subscribes_name_lib = ["818","818本服","更新", "开服", "新闻", "抓马", "扶摇", "诛恶", "阵营活动提醒", "攻防实况", "玄晶","奇遇","绝世奇遇"]
+subscribes_name_lib = ["818", "818本服", "更新", "开服", "新闻", "抓马", "扶摇", "诛恶", "阵营活动提醒", "攻防实况",
+                       "玄晶", "奇遇", "绝世奇遇"]
+
 
 async def add_group_id_subscribe(group_id_in: int, subscribe_in: str):
     subscribes_db.insert({"group_id": group_id_in, "subscribe": [subscribe_in]})
@@ -39,7 +42,7 @@ async def get_subscribe_group(subscribe: str):
     return group_ids
 
 
-subscribe_event = on_command(head + "订阅", priority=5)
+subscribe_event = on_command(head + "订阅", priority=5, permission=GROUP_OWNER | GROUP_ADMIN)
 
 
 @subscribe_event.handle()
