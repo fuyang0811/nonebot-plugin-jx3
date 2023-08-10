@@ -5,21 +5,6 @@ from nonebot import on_command
 from nonebot.adapters import Message
 from nonebot.adapters.onebot.v11 import MessageSegment
 from nonebot.params import CommandArg
-
-#from .zhue import setup2
-
-
-
-if not os.path.exists("./data"):
-    os.mkdir("./data")
-if not os.path.exists("./data/jx3bind.json"):
-    with open("./data/jx3bind.json", "w+", encoding="utf-8") as f:
-        f.write("{}")
-if not os.path.exists("./data/jx3subscribe.json"):
-    with open("./data/jx3subscribe.json", "w+", encoding="utf-8") as f:
-        f.write("{}")
-print("11111")
-api_base_url = "https://www.jx3api.com"
 from nonebot import get_driver
 from .config import Config
 from . import subscribe
@@ -36,13 +21,14 @@ __plugin_meta__ = PluginMetadata(
     homepage="https://github.com/fuyang0811/nonebot-plugin-jx3",
     supported_adapters={"~onebot.v11"},
 )
+api_base_url = "https://www.jx3api.com"
 plugin_config = Config.parse_obj(get_driver().config)
 robot = plugin_config.jx3_bot_name
 head = plugin_config.jx3_command_header
 ticket = plugin_config.jx3_tuilan_ticket
 token = plugin_config.jx3api_key
 from .websocket_handler import wss_close
-from nonebot import get_driver
+
 
 # global_config = get_driver().config
 # config.setup(global_config)

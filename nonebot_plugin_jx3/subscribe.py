@@ -13,8 +13,7 @@ robot = plugin_config.jx3_bot_name
 head = plugin_config.jx3_command_header
 ticket = plugin_config.jx3_tuilan_ticket
 token = plugin_config.jx3api_key
-db_path2 = "./data/jx3subscribe.json"  # os.path.join(os.path.dirname(__file__), 'data', 'jx3subscribe.json')
-subscribes_db = TinyDB(db_path2)
+subscribes_db = TinyDB("./data/jx3_subscribe.json")
 User = Query()
 subscribes_name_lib = ["818","818本服","更新", "开服", "新闻", "抓马", "扶摇", "诛恶", "阵营活动提醒", "攻防实况", "玄晶","奇遇","绝世奇遇"]
 

@@ -1,5 +1,4 @@
 from typing import Optional
-
 from nonebot import on_command
 from nonebot.adapters import Message
 from nonebot.params import CommandArg
@@ -9,8 +8,7 @@ from .config import Config
 
 plugin_config = Config.parse_obj(get_driver().config)
 head = plugin_config.jx3_command_header
-db_path1 = "./data/jx3bind.json"#os.path.join(os.path.dirname(__file__), 'data', 'jx3bind.json')
-bind_servers_db = TinyDB(db_path1)
+bind_servers_db = TinyDB("./data/jx3_bind.json")
 User = Query()
 server_lib=[""]
 
