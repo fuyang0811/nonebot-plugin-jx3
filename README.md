@@ -37,12 +37,17 @@ nonebot-plugin-jx3 是一个使用 NoneBot 框架编写的插件，它提供了�
 
 <details>
 <summary>手动安装</summary>
-将插件文件夹复制到你的 NoneBot 项目的 plugins 目录下。
+将 none-plugin-jx3 文件夹复制到你的 NoneBot 项目的 plugins 目录下。
 
-在你的 NoneBot 配置文件中，添加插件的导入路径，例如：
+在你的 NoneBot 配置文件中，添加插件的导入路径：
 
-nonebot.load_plugins("plugins.nonebot_plugin_jx3")
+plugin_dirs = ["plugins"]
 
+将requirements.txt复制到bot目录，进入bot的虚拟环境，执行：
+
+    pip install -r requirements.txt
+
+安装完成后正常启动bot即可
 </details>
 
 ## ⚙️ 配置
