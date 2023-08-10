@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot-plugin-jx3"
-version = "0.6.2"
+version = "0.6.3"
 description = "一个nonebot2的jx3插件"
 authors = ["water <415276785@qq.com>"]
 license ="MIT"
