@@ -50,12 +50,12 @@ nonebot.load_plugins("plugins.nonebot_plugin_jx3")
 在 nonebot2 项目的`.env`文件中添加下表中的必填配置
 
 | 配置项 | 必填 | 默认值 | 说明 |
-|:-----:|:----:|:----:|:----:|
-| jx3api_key | 否 | 无 | jx3.api.com购买的key |
-| jx3_tuilan_ticket | 否 | 无 | 推栏ticket |
-| jx3wss_token| 否 | 无 | jx3.api.com购买的wss |
-| jx3_command_header | 否 | 无 | 指令的前缀，防止和其他插件冲突 |
-| jx3_bot_name | 是 | 无 | api生成图片用的名字 |
+|:-----:|:--:|:---:|:----:|
+| jx3api_key | 否  |  空  | jx3.api.com购买的key |
+| jx3_tuilan_ticket | 否  |  空  | 推栏ticket |
+| jx3wss_token| 否  |  空  | jx3.api.com购买的wss |
+| jx3_command_header | 否  |  空  | 指令的前缀，防止和其他插件冲突 |
+| jx3_bot_name | 否  | 团团  | api生成图片用的名字 |
 
 第一步使用插件是要绑定服务器。例如：-绑定 绝代天骄
 
