@@ -69,3 +69,5 @@ plugin_dirs = ["plugins"]
 开发者:water
 
 qq:415276785
+
+感谢 绝代天骄-白首亦同归-帮主 赞助api测试。
