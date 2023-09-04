@@ -56,9 +56,9 @@ plugin_dirs = ["plugins"]
 
 | 配置项 | 必填 | 默认值 | 说明 |
 |:-----:|:--:|:---:|:----:|
-| jx3api_key | 否  |  空  | jx3.api.com购买的key |
+| jx3api_key | 否  |  空  | jx3api.com购买的key |
 | jx3_tuilan_ticket | 否  |  空  | 推栏ticket |
-| jx3wss_token| 否  |  空  | jx3.api.com购买的wss |
+| jx3wss_token| 否  |  空  | jx3api.com购买的wss |
 | jx3_command_header | 否  |  空  | 指令的前缀，防止和其他插件冲突 |
 | jx3_bot_name | 否  | 团团  | api生成图片用的名字 |
 
