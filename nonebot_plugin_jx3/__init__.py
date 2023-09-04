@@ -77,7 +77,8 @@ async def handle_jx3api_gold_price(event, args: Message = CommandArg()):
         "scale": 1,
         "server": server,
         "robot": robot,
-        "cache": 1
+        "cache": 1,
+        "token": token
     }
     print(params)
     response = await jx3api_request("/view/trade/demon", params)
@@ -104,7 +105,8 @@ async def handle_jx3api_active_today(event, args: Message = CommandArg()):
         "server": server,
         "num": 0,  # 新增一行，将num参数加入字典
         "robot": robot,
-        "cache": 1
+        "cache": 1,
+        "token": token
     }
     print(params)
     response = await jx3api_request("/view/active/current", params)  # 修改API的endpoint
@@ -131,7 +133,8 @@ async def handle_active_calendar(event, args: Message = CommandArg()):
         "server": server,
         "num": 7,  # 新增一行，将num参数加入字典
         "robot": robot,
-        "cache": 1
+        "cache": 1,
+        "token": token
     }
     print(params)
     response = await jx3api_request("/view/active/calendar", params)  # 修改API的endpoint
@@ -158,7 +161,8 @@ async def handle_jx3api_home_flower(event, args: Message = CommandArg()):
         "scale": 1,
         "server": server,
         "robot": robot,
-        "cache": 1
+        "cache": 1,
+        "token": token
     }
     print(params)
     response = await jx3api_request("/view/home/flower", params)  # 修改API的endpoint
@@ -181,7 +185,8 @@ async def handle_web_announce():
     params = {
         "scale": 1,
         "robot": robot,
-        "cache": 1
+        "cache": 1,
+        "token": token
     }
     print(params)
     response = await jx3api_request("/view/web/announce", params)  # 修改API的endpoint
