@@ -12,7 +12,6 @@ if not os.path.exists("./data"):
 from . import subscribe
 from .bind import get_bind_server
 from .userdefine import emm
-
 __plugin_meta__ = PluginMetadata(
     name="剑网三查询和推送",
     description="是一个使用 NoneBot 框架编写的插件，提供多种剑网三功能如日常查询，预测，金价查询，鲜花，公告，沙盘，jjc，黑市，骚话，奇遇，招募以及多种消息推送功能。",
@@ -58,7 +57,7 @@ jx3api_help = on_command("剑网三帮助")
 
 @jx3api_help.handle()
 async def handle_help():
-    await jx3api_help.finish("目前完成的指令有：绑定，日常，预测，金价，鲜花，公告，沙盘，jjc，黑市，骚话，奇遇，招募")
+    await jx3api_help.finish(MessageSegment.image("https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBcDJ3X0ZXaUZmRW9nVEVMX3NxOE9IczhST3pUP2U9WUhOY3N0.jpg"))
 
 
 jx3api_gold_price = on_command(head + "金价")
