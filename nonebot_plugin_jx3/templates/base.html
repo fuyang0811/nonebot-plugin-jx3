@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  /* === 全局样式 === */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 600px;
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #e0e0e0;
+    padding: 20px;
+  }
+  /* === 卡片容器 === */
+  .card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    backdrop-filter: blur(10px);
+  }
+  /* === 标题 === */
+  .title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #d4af37;
+    text-align: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(212,175,55,0.3);
+    margin-bottom: 16px;
+  }
+  .subtitle {
+    font-size: 16px;
+    color: #c0a030;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  /* === 表格 === */
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    background: rgba(212,175,55,0.15);
+    color: #d4af37;
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 14px;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px;
+  }
+  tr:hover td { background: rgba(255,255,255,0.03); }
+  /* === 列表 === */
+  .list-item {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 14px;
+  }
+  .list-item:last-child { border-bottom: none; }
+  /* === 页脚 === */
+  .footer {
+    text-align: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 11px;
+    margin-top: 12px;
+  }
+  /* === 标签 === */
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin: 2px;
+  }
+  .tag-green { background: rgba(76,175,80,0.2); color: #81c784; }
+  .tag-red { background: rgba(244,67,54,0.2); color: #ef9a9a; }
+  .tag-gold { background: rgba(212,175,55,0.2); color: #d4af37; }
+  .tag-blue { background: rgba(33,150,243,0.2); color: #90caf9; }
+  .tag-purple { background: rgba(156,39,176,0.2); color: #ce93d8; }
+  /* === 状态指示 === */
+  .status-on { color: #81c784; }
+  .status-off { color: #ef9a9a; }
+  /* === 数值高亮 === */
+  .highlight { color: #d4af37; font-weight: bold; }
+  .text-muted { color: rgba(255,255,255,0.5); font-size: 12px; }
+  /* === 分隔线 === */
+  .divider {
+    height: 1px;
+    background: rgba(212,175,55,0.2);
+    margin: 12px 0;
+  }
+</style>
+</head>
+<body>
+  {% block content %}{% endblock %}
+  <div class="footer">{{ bot_name }} · JX3API · {{ timestamp }}</div>
+</body>
+</html>

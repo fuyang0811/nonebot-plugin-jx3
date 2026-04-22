@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 600px;
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #e0e0e0;
+    padding: 20px;
+  }
+  .card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #d4af37;
+    text-align: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(212,175,55,0.3);
+    margin-bottom: 16px;
+  }
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .price-row:last-child { border-bottom: none; }
+  .price-label {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+  }
+  .price-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #d4af37;
+  }
+  .price-unit {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    margin-left: 4px;
+  }
+  .date-info {
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  .footer {
+    text-align: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 11px;
+    margin-top: 12px;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    background: rgba(212,175,55,0.15);
+    color: #d4af37;
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 14px;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title">{{ title }}</div>
+    {% if data is iterable and data is not mapping %}
+      {% for item in data %}
+      <div style="margin-bottom:12px;">
+        {% if item is mapping %}
+          {% if item.zone is defined %}
+          <div class="price-row">
+            <span class="price-label">区服</span>
+            <span class="price-value">{{ item.zone }} · {{ item.server }}</span>
+          </div>
+          {% endif %}
+          {% if item.tieba is defined %}
+          <div class="price-row">
+            <span class="price-label">贴吧</span>
+            <span class="price-value">{{ item.tieba }}<span class="price-unit">元/万金</span></span>
+          </div>
+          {% endif %}
+          {% if item.wanbaolou is defined %}
+          <div class="price-row">
+            <span class="price-label">万宝楼</span>
+            <span class="price-value">{{ item.wanbaolou }}<span class="price-unit">元/万金</span></span>
+          </div>
+          {% endif %}
+          {% if item.dd373 is defined %}
+          <div class="price-row">
+            <span class="price-label">DD373</span>
+            <span class="price-value">{{ item.dd373 }}<span class="price-unit">元/万金</span></span>
+          </div>
+          {% endif %}
+          {% if item.date is defined %}
+          <div class="date-info">📅 {{ item.date }}</div>
+          {% endif %}
+          {# 通用：其他字段 #}
+          {% for key, value in item.items() %}
+            {% if key not in ['zone', 'server', 'tieba', 'wanbaolou', 'dd373', 'date', '5173'] %}
+            <div class="price-row">
+              <span class="price-label">{{ key }}</span>
+              <span class="price-value">{{ value }}</span>
+            </div>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <p>{{ item }}</p>
+        {% endif %}
+        {% if not loop.last %}<div style="border-bottom:1px solid rgba(212,175,55,0.15);margin:8px 0;"></div>{% endif %}
+      </div>
+      {% endfor %}
+    {% elif data is mapping %}
+      {% for key, value in data.items() %}
+      <div class="price-row">
+        <span class="price-label">{{ key }}</span>
+        <span class="price-value">{{ value }}</span>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p>{{ data }}</p>
+    {% endif %}
+  </div>
+  <div class="footer">{{ bot_name }} · JX3API · {{ timestamp }}</div>
+</body>
+</html>

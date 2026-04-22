@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 600px;
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #e0e0e0;
+    padding: 20px;
+  }
+  .card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #d4af37;
+    text-align: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(212,175,55,0.3);
+    margin-bottom: 16px;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    background: rgba(212,175,55,0.15);
+    color: #d4af37;
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 14px;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px;
+  }
+  tr:hover td { background: rgba(255,255,255,0.03); }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin: 2px;
+  }
+  .tag-gold { background: rgba(212,175,55,0.2); color: #d4af37; }
+  .tag-blue { background: rgba(33,150,243,0.2); color: #90caf9; }
+  .tag-green { background: rgba(76,175,80,0.2); color: #81c784; }
+  .tag-purple { background: rgba(156,39,176,0.2); color: #ce93d8; }
+  .subtitle {
+    font-size: 16px;
+    color: #c0a030;
+    margin: 16px 0 8px 0;
+    font-weight: bold;
+  }
+  .footer {
+    text-align: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 11px;
+    margin-top: 12px;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title">📅 {{ data.date if data.date is defined else '' }} {{ data.week if data.week is defined else '' }} 日常</div>
+    <table>
+      {% if data is mapping %}
+        {% if data.war is defined %}<tr><th>大战</th><td>{{ data.war }}</td></tr>{% endif %}
+        {% if data.battle is defined %}<tr><th>战场</th><td>{{ data.battle }}</td></tr>{% endif %}
+        {% if data.orecar is defined %}<tr><th>矿车</th><td>{{ data.orecar }}</td></tr>{% endif %}
+        {% if data.school is defined %}<tr><th>门派</th><td>{{ data.school }}</td></tr>{% endif %}
+        {% if data.rescue is defined %}<tr><th>救援</th><td>{{ data.rescue }}</td></tr>{% endif %}
+        {% if data.draw is defined and data.draw %}<tr><th>美人图</th><td>{{ data.draw }}</td></tr>{% endif %}
+        {% if data.card is defined %}
+        <tr><th>武林秘境</th><td>
+          {% if data.card is iterable and data.card is not string %}
+            {% for c in data.card %}<span class="tag tag-gold">{{ c }}</span>{% endfor %}
+          {% else %}
+            {{ data.card }}
+          {% endif %}
+        </td></tr>
+        {% endif %}
+        {% if data.team is defined %}
+        <tr><th>武林团队</th><td>
+          {% if data.team is iterable and data.team is not string %}
+            {% for t in data.team %}<span class="tag tag-blue">{{ t }}</span>{% endfor %}
+          {% else %}
+            {{ data.team }}
+          {% endif %}
+        </td></tr>
+        {% endif %}
+        {# 通用：遍历其他未明确处理的字段 #}
+        {% for key, value in data.items() %}
+          {% if key not in ['date', 'week', 'war', 'battle', 'orecar', 'school', 'rescue', 'draw', 'team', 'card', 'luck', 'year', 'month', 'day'] %}
+          <tr><th>{{ key }}</th><td>
+            {% if value is iterable and value is not string %}
+              {% for v in value %}<span class="tag tag-gold">{{ v }}</span>{% endfor %}
+            {% else %}
+              {{ value }}
+            {% endif %}
+          </td></tr>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </table>
+  </div>
+  {% if data is mapping and data.luck is defined and data.luck %}
+  <div class="card">
+    <div class="subtitle">🍀 宠物奇遇</div>
+    <p>
+      {% for l in data.luck %}<span class="tag tag-purple">{{ l }}</span>{% endfor %}
+    </p>
+  </div>
+  {% endif %}
+  <div class="footer">{{ bot_name }} · JX3API · {{ timestamp }}</div>
+</body>
+</html>

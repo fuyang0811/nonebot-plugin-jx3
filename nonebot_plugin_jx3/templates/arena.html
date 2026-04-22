@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 600px;
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #e0e0e0;
+    padding: 20px;
+  }
+  .card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #d4af37;
+    text-align: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(212,175,55,0.3);
+    margin-bottom: 16px;
+  }
+  .stats-row {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 16px;
+  }
+  .stat-item { text-align: center; }
+  .stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #d4af37;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+  }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  th {
+    background: rgba(212,175,55,0.15);
+    color: #d4af37;
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 14px;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px;
+  }
+  .win { color: #81c784; }
+  .lose { color: #ef9a9a; }
+  .footer {
+    text-align: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 11px;
+    margin-top: 12px;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title">{{ title }}</div>
+    {% if data is mapping %}
+      {# 总览统计 #}
+      <div class="stats-row">
+        {% if data.total_count is defined %}
+        <div class="stat-item">
+          <div class="stat-value">{{ data.total_count }}</div>
+          <div class="stat-label">总场次</div>
+        </div>
+        {% endif %}
+        {% if data.win_count is defined %}
+        <div class="stat-item">
+          <div class="stat-value win">{{ data.win_count }}</div>
+          <div class="stat-label">胜</div>
+        </div>
+        {% endif %}
+        {% if data.lose_count is defined %}
+        <div class="stat-item">
+          <div class="stat-value lose">{{ data.lose_count }}</div>
+          <div class="stat-label">负</div>
+        </div>
+        {% endif %}
+        {% if data.mvp_count is defined %}
+        <div class="stat-item">
+          <div class="stat-value" style="color:#ce93d8;">{{ data.mvp_count }}</div>
+          <div class="stat-label">MVP</div>
+        </div>
+        {% endif %}
+        {% if data.rating is defined %}
+        <div class="stat-item">
+          <div class="stat-value">{{ data.rating }}</div>
+          <div class="stat-label">评分</div>
+        </div>
+        {% endif %}
+      </div>
+      {# 最近对局 #}
+      {% if data.recent is defined and data.recent is iterable %}
+      <table>
+        <tr><th>结果</th><th>评分</th><th>时间</th></tr>
+        {% for match in data.recent %}
+        <tr>
+          <td class="{{ 'win' if match.is_win else 'lose' }}">{{ '胜' if match.is_win else '负' }}</td>
+          <td>{{ match.mmr if match.mmr is defined else match.get('score', '') }}</td>
+          <td>{{ match.pvp_type if match.pvp_type is defined else '' }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+      {# 通用字段 #}
+      {% for key, value in data.items() %}
+        {% if key not in ['total_count', 'win_count', 'lose_count', 'mvp_count', 'rating', 'recent', 'performance'] %}
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+          <span style="color:rgba(255,255,255,0.6);font-size:13px;">{{ key }}</span>
+          <span style="font-size:13px;">{{ value }}</span>
+        </div>
+        {% endif %}
+      {% endfor %}
+    {% elif data is iterable %}
+      <table>
+        {% if data | length > 0 and data[0] is mapping %}
+          {% set keys = data[0].keys() | list %}
+          <tr>{% for k in keys %}<th>{{ k }}</th>{% endfor %}</tr>
+          {% for item in data %}
+          <tr>{% for k in keys %}<td>{{ item.get(k, '') }}</td>{% endfor %}</tr>
+          {% endfor %}
+        {% endif %}
+      </table>
+    {% endif %}
+  </div>
+  <div class="footer">{{ bot_name }} · JX3API · {{ timestamp }}</div>
+</body>
+</html>

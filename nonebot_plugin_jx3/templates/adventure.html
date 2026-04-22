@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 600px;
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #e0e0e0;
+    padding: 20px;
+  }
+  .card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #d4af37;
+    text-align: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(212,175,55,0.3);
+    margin-bottom: 16px;
+  }
+  .server-info {
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .adv-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .adv-item:last-child { border-bottom: none; }
+  .adv-name {
+    font-size: 15px;
+    font-weight: bold;
+  }
+  .adv-name.rare { color: #ce93d8; }
+  .adv-name.normal { color: #90caf9; }
+  .adv-player {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 2px;
+  }
+  .adv-time {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    text-align: right;
+  }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    margin-left: 8px;
+  }
+  .tag-purple { background: rgba(156,39,176,0.2); color: #ce93d8; }
+  .footer {
+    text-align: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 11px;
+    margin-top: 12px;
+  }
+  .empty { text-align: center; color: rgba(255,255,255,0.4); padding: 30px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title">{{ title }}</div>
+    {% if server is defined %}
+    <div class="server-info">🌐 {{ server }}</div>
+    {% endif %}
+    {% if data is iterable and data is not mapping %}
+      {% if data | length > 0 %}
+        {% for item in data %}
+        <div class="adv-item">
+          <div>
+            {% if item is mapping %}
+              <span class="adv-name {{ 'rare' if item.level is defined and item.level == 2 else 'normal' }}">
+                {{ item.event if item.event is defined else (item.name if item.name is defined else '') }}
+              </span>
+              {% if item.level is defined and item.level == 2 %}
+                <span class="tag tag-purple">绝世</span>
+              {% endif %}
+              {% if item.name is defined and item.event is defined %}
+                <div class="adv-player">{{ item.name }}</div>
+              {% endif %}
+            {% else %}
+              <span class="adv-name normal">{{ item }}</span>
+            {% endif %}
+          </div>
+          {% if item is mapping and item.time is defined %}
+          <div class="adv-time">{{ item.time | format_ts }}</div>
+          {% elif item is mapping and item.date is defined %}
+          <div class="adv-time">{{ item.date }}</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="empty">暂无奇遇记录</div>
+      {% endif %}
+    {% elif data is mapping %}
+      {% for key, value in data.items() %}
+      <div class="adv-item">
+        <span class="adv-name normal">{{ key }}</span>
+        <span class="adv-time">{{ value }}</span>
+      </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+  <div class="footer">{{ bot_name }} · JX3API · {{ timestamp }}</div>
+</body>
+</html>

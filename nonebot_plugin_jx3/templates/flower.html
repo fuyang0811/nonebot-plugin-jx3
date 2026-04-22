@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 700px;
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #e0e0e0;
+    padding: 20px;
+  }
+  .title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #d4af37;
+    text-align: center;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(212,175,55,0.3);
+  }
+  .map-block {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+  .map-name {
+    font-size: 15px;
+    font-weight: bold;
+    color: #90caf9;
+    margin-bottom: 10px;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    background: rgba(212,175,55,0.12);
+    color: #d4af37;
+    padding: 6px 10px;
+    font-size: 13px;
+    text-align: left;
+  }
+  td {
+    padding: 6px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px;
+  }
+  .price { color: #ffb74d; font-weight: bold; }
+  .footer {
+    text-align: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 11px;
+    margin-top: 12px;
+  }
+</style>
+</head>
+<body>
+  <div class="title">{{ title }}</div>
+  {% for map_name, flowers in data.items() %}
+  <div class="map-block">
+    <div class="map-name">{{ map_name }}</div>
+    <table>
+      <tr><th>鲜花</th><th>颜色</th><th>单价</th><th>采集线路</th></tr>
+      {% for f in flowers %}
+      <tr>
+        <td>{{ f.get('name', '') }}</td>
+        <td>{{ f.get('color', '') }}</td>
+        <td class="price">{{ f.get('price', '') }}</td>
+        <td>{{ f.get('line', []) | join(' → ') }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% endfor %}
+  <div class="footer">{{ bot_name }} · JX3API · {{ timestamp }}</div>
+</body>
+</html>

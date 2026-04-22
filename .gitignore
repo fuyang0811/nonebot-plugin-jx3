@@ -1,0 +1,6 @@
+﻿__pycache__/
+*.pyc
+dist/
+nonebot_plugin_jx3/data/
+old_readme.md
+old_readme_utf8.md

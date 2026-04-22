@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 600px;
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #e0e0e0;
+    padding: 20px;
+  }
+  .card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #d4af37;
+    text-align: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(212,175,55,0.3);
+    margin-bottom: 16px;
+  }
+  .role-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .role-info { flex: 1; }
+  .role-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #d4af37;
+  }
+  .role-server {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+  }
+  .field-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .field-row:last-child { border-bottom: none; }
+  .field-label {
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .field-value {
+    font-size: 13px;
+    color: #e0e0e0;
+  }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin: 2px;
+  }
+  .tag-gold { background: rgba(212,175,55,0.2); color: #d4af37; }
+  .tag-blue { background: rgba(33,150,243,0.2); color: #90caf9; }
+  .footer {
+    text-align: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 11px;
+    margin-top: 12px;
+  }
+  .role-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+    border: 2px solid rgba(212,175,55,0.5);
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title">{{ title }}</div>
+    {% if data is mapping %}
+      {% set role_name = data.name if data.name is defined else (data.roleName if data.roleName is defined else '') %}
+      {% if role_name %}
+      <div class="role-header">
+        {% if data.personAvatar is defined and data.personAvatar %}
+        <img src="{{ data.personAvatar }}" class="role-avatar" />
+        {% endif %}
+        <div class="role-info">
+          <div class="role-name">{{ role_name }}</div>
+          {% if data.serverName is defined %}<div class="role-server">🌐 {{ data.zoneName }} · {{ data.serverName }}</div>{% endif %}
+          {% if data.forceName is defined %}<div class="role-server">🏫 {{ data.forceName }} · {{ data.bodyName }}</div>{% endif %}
+        </div>
+      </div>
+      {% endif %}
+      
+      {% set label_map = {
+        'tongName': '帮会',
+        'campName': '阵营',
+        'personName': '家园结庐',
+        'globalId': '万宝楼ID'
+      } %}
+      
+      {% for key, value in data.items() %}
+        {% if key in label_map and value %}
+        <div class="field-row">
+          <span class="field-label">{{ label_map[key] }}</span>
+          <span class="field-value">
+            {% if value is iterable and value is not string %}
+              {% for v in value %}<span class="tag tag-blue">{{ v }}</span>{% endfor %}
+            {% else %}
+              {{ value }}
+            {% endif %}
+          </span>
+        </div>
+        {% elif key not in ['zoneName', 'serverName', 'roleName', 'forceName', 'bodyName', 'personAvatar', 'roleId', 'forceId', 'bodyId', 'tongId', 'campId'] and 'Id' not in key and 'Name' not in key %}
+        {# 对于未映射的值显示兜底，排除基础信息和纯ID字段 #}
+        <div class="field-row">
+          <span class="field-label">{{ key }}</span>
+          <span class="field-value">{{ value }}</span>
+        </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  </div>
+  <div class="footer">{{ bot_name }} · JX3API · {{ timestamp }}</div>
+</body>
+</html>
