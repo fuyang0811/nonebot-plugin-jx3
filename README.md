@@ -11,7 +11,7 @@
 _基于 [NoneBot2](https://github.com/nonebot/nonebot2) 的剑网三（JX3）全功能 QQ 群助手插件，支持游戏数据查询与实时推送通知。_
 
 <a href="./LICENSE">
-    <img src="https://img.shields.io/github/license/fuyang0811/nonebot-plugin-jx3.svg" alt="license">
+    <img src="https://img.shields.io/github/license/fuyang0811/nonebot-plugin-jx3.svg?cache=clear" alt="license">
 </a>
 <a href="https://pypi.python.org/pypi/nonebot-plugin-jx3">
     <img src="https://img.shields.io/pypi/v/nonebot-plugin-jx3.svg" alt="pypi">
