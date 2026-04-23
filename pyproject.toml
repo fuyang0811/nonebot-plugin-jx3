@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot-plugin-jx3"
-version = "1.0.5"
+version = "1.0.6"
 description = "基于 NoneBot2 的剑网三全功能 QQ 群助手插件"
 authors = ["water <1594567228@qq.com>"]
 license = "MIT"
